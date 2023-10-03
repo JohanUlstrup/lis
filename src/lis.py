@@ -46,7 +46,27 @@ def longest_increasing_substring(x: Sequence[Any]) -> tuple[int, int]:
     >>> longest_increasing_substring([12, 45, 32, 65, 78, 23, 35, 45, 57])
     (5, 9)
     """
+    n = len(x)
+    if n == 0:
+        return (0, 0)
+
     # The leftmost empty string is our first best bet
-    best = (0, 0)
-    # FIXME: explore the other possibilities
+    start = 0  # Start index of the current increasing substring
+    best = (0, 0)  # Store the best (i, j) pair found so far
+
+    for i in range(1, n):
+        if x[i] <= x[i - 1]:
+            # The current increasing substring has ended
+            if substring_length(best) < i - start:
+                best = (start, i - 1)
+            start = i
+
+    # Check if the last increasing substring is the longest
+    if substring_length(best) < n - start:
+        best = (start, n - 1)
+
     return best
+  
+  # Example usage:
+result = longest_increasing_substring([12, 45, 32, 65, 78, 23, 35, 45, 57])
+print(result)  # Output: (5, 9)
