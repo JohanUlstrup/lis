@@ -50,7 +50,6 @@ def longest_increasing_substring(x: Sequence[Any]) -> tuple[int, int]:
     if n == 0:
         return (0, 0)
 
-    #   The leftmost empty string is our first best bet
     start = 0  # Start index of the current increasing substring
     best = (0, 0)  # Store the best (i, j) pair found so far
 
